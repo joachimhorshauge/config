@@ -1,0 +1,50 @@
+window {
+  background-color: transparent;
+}
+
+.clock {
+  background-color: #2a2a37;
+  font-weight: bold;
+
+  padding: 12px 16px;
+  border: 2px solid #363646;
+
+  border-radius: 0 0 0 18px;
+
+  min-width: 0;
+  min-height: 0;
+
+  outline: none;
+}
+
+.clock:hover {
+  background-color: #363646;
+}
+
+.clock:active {
+  background-color: #2a2a37;
+}
+
+.clock-time-row {
+  color: #dcd7ba;
+
+  font-family: "Google Sans Flex", "JetBrainsMono Nerd Font Propo", sans-serif;
+}
+
+.clock-time {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.clock-date {
+  color: #d5cfad;
+
+  font-family: "Google Sans Flex", "JetBrainsMono Nerd Font Propo", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+revealer {
+  transition: 200ms ease-in-out;
+}
