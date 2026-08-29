@@ -18,6 +18,13 @@ require("conform").setup({
 		-- typst is absent on purpose: tinymist formats it with the typstyle it
 		-- has built in, and `lsp_format = "fallback"` below reaches for the
 		-- server precisely when no formatter is listed here.
+
+		-- haskell and cabal are absent for the same reason: HLS has ormolu
+		-- compiled in and formats through the LSP fallback, so there is no second
+		-- binary to install and no chance of the two disagreeing about a file.
+		-- The provider is named in lsp/hls.lua; switching it there is the whole
+		-- change. A standalone ormolu listed here would take over instead, which
+		-- is worth doing only to format Haskell in projects HLS refuses to load.
 	},
 
 	formatters = {

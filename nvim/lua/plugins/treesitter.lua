@@ -32,6 +32,7 @@ local ensure = {
 	"javascript", -- <script> blocks in templates, via html's own injections
 	"typst",
 	"go",
+	"haskell",
 	"gomod",
 	"gosum",
 	"gowork",

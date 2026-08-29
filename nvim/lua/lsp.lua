@@ -2,6 +2,7 @@ vim.lsp.enable('luals')
 vim.lsp.enable('gopls')
 vim.lsp.enable('qmlls')
 vim.lsp.enable('tinymist')
+vim.lsp.enable('hls')
 
 -- Three servers share the HTML buffer: html answers for markup and the hx-*
 -- custom data, emmet expands abbreviations, cssls takes the .css files and the
