@@ -1,0 +1,255 @@
+{
+  "$comment": "VS Code custom-data for htmx 2.x, loaded by vscode-html-language-server via initializationOptions.dataPaths (see lsp/html.lua). Makes hx-* complete inside a tag with hover docs, instead of being snippets to memorise.",
+  "version": 1.1,
+  "globalAttributes": [
+    {
+      "name": "hx-get",
+      "description": "Issues a GET to the given URL and swaps the HTML response into the DOM.\n\nThe request is triggered by the element's natural event (click for most elements, change for inputs, submit for forms) unless `hx-trigger` says otherwise.\n\n```html\n<button hx-get=\"/items\" hx-target=\"#list\">Load</button>\n```",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-get/" }]
+    },
+    {
+      "name": "hx-post",
+      "description": "Issues a POST to the given URL and swaps the HTML response into the DOM.\n\n```html\n<form hx-post=\"/items\" hx-target=\"#list\" hx-swap=\"beforeend\">\n```",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-post/" }]
+    },
+    {
+      "name": "hx-put",
+      "description": "Issues a PUT to the given URL and swaps the HTML response into the DOM.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-put/" }]
+    },
+    {
+      "name": "hx-patch",
+      "description": "Issues a PATCH to the given URL and swaps the HTML response into the DOM.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-patch/" }]
+    },
+    {
+      "name": "hx-delete",
+      "description": "Issues a DELETE to the given URL and swaps the HTML response into the DOM.\n\nReturning an empty body with `hx-swap=\"outerHTML\"` is the usual way to remove the row that was deleted.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-delete/" }]
+    },
+    {
+      "name": "hx-target",
+      "description": "Which element the response is swapped into. Defaults to the element that made the request.",
+      "valueSet": "hx-target",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-target/" }]
+    },
+    {
+      "name": "hx-swap",
+      "description": "How the response is swapped in relative to the target. Defaults to `innerHTML`.\n\nModifiers append to the value: `swap:200ms`, `settle:1s`, `scroll:top`, `show:bottom`, `transition:true`, `ignoreTitle:true`, `focus-scroll:true`.",
+      "valueSet": "hx-swap",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-swap/" }]
+    },
+    {
+      "name": "hx-swap-oob",
+      "description": "Marks an element **in the response** as an out-of-band swap: htmx pulls it out and swaps it against the element with the same `id` already in the DOM, independently of `hx-target`.\n\nValue is `true` (outerHTML) or any `hx-swap` value, optionally `strategy:selector`.\n\nThe usual way to update a cart badge from a response that is otherwise about the cart list.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-swap-oob/" }]
+    },
+    {
+      "name": "hx-trigger",
+      "description": "Which event fires the request, replacing the element's default.\n\nComma-separated for several. Modifiers: `once`, `changed`, `delay:1s`, `throttle:500ms`, `from:<selector>`, `target:<selector>`, `consume`, `queue:first|last|all|none`.\n\n```html\n<input hx-get=\"/search\" hx-trigger=\"keyup changed delay:300ms\">\n<div hx-get=\"/feed\" hx-trigger=\"every 2s\">\n<div hx-get=\"/more\" hx-trigger=\"revealed\">\n```\n\nSpecial events: `load`, `revealed`, `intersect`, `every <t>`.",
+      "valueSet": "hx-trigger",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-trigger/" }]
+    },
+    {
+      "name": "hx-vals",
+      "description": "Extra values to submit with the request, as a JSON object. Prefix with `js:` to evaluate an expression instead.\n\n```html\n<div hx-post=\"/x\" hx-vals='{\"id\": 42}'>\n```\n\nIn a Go template, mind the quoting: `hx-vals='{\"id\": {{ .ID }}}'`.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-vals/" }]
+    },
+    {
+      "name": "hx-params",
+      "description": "Filters which parameters are submitted: `*`, `none`, `not <list>`, or a comma-separated list of names.",
+      "valueSet": "hx-params",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-params/" }]
+    },
+    {
+      "name": "hx-include",
+      "description": "A CSS selector for additional elements whose values are included in the request — the way to submit inputs that live outside the element being triggered.\n\nAccepts the extended syntax: `closest`, `find`, `next`, `previous`, `this`.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-include/" }]
+    },
+    {
+      "name": "hx-headers",
+      "description": "Extra request headers as a JSON object. Prefix with `js:` to evaluate.\n\n```html\n<div hx-post=\"/x\" hx-headers='{\"X-CSRF-Token\": \"{{ .CSRF }}\"}'>\n```",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-headers/" }]
+    },
+    {
+      "name": "hx-select",
+      "description": "A CSS selector picking the part of the response to swap in, discarding the rest. Lets a handler return a whole page and the client take one fragment.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-select/" }]
+    },
+    {
+      "name": "hx-select-oob",
+      "description": "Comma-separated selectors picking pieces of the response to swap out-of-band, for responses you do not control the markup of.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-select-oob/" }]
+    },
+    {
+      "name": "hx-boost",
+      "description": "Turns descendant `<a>` and `<form>` into AJAX requests that replace `<body>` and push history, degrading to normal navigation without JS.\n\nUsually set once on `<body>`.",
+      "valueSet": "v",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-boost/" }]
+    },
+    {
+      "name": "hx-push-url",
+      "description": "Pushes the request URL into browser history so the result is bookmarkable and Back works. `true`, `false`, or a URL.",
+      "valueSet": "hx-url-bool",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-push-url/" }]
+    },
+    {
+      "name": "hx-replace-url",
+      "description": "Replaces the current history entry instead of pushing a new one. `true`, `false`, or a URL.",
+      "valueSet": "hx-url-bool",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-replace-url/" }]
+    },
+    {
+      "name": "hx-indicator",
+      "description": "A CSS selector for the element that gets the `htmx-request` class while the request is in flight. Defaults to the requesting element.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-indicator/" }]
+    },
+    {
+      "name": "hx-disabled-elt",
+      "description": "A CSS selector for elements to set `disabled` on for the duration of the request — the standard double-submit guard. `this` and `closest form` are the common values.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-disabled-elt/" }]
+    },
+    {
+      "name": "hx-confirm",
+      "description": "Shows a `confirm()` dialog with this message before issuing the request.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-confirm/" }]
+    },
+    {
+      "name": "hx-prompt",
+      "description": "Shows a `prompt()` with this message; the answer is sent in the `HX-Prompt` header.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-prompt/" }]
+    },
+    {
+      "name": "hx-sync",
+      "description": "Coordinates requests between elements: `<selector>:<strategy>` where strategy is `drop`, `abort`, `replace`, or `queue first|last|all`.\n\n```html\n<input hx-sync=\"closest form:abort\">\n```",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-sync/" }]
+    },
+    {
+      "name": "hx-on",
+      "description": "Inline handler for an event, as `hx-on:<event>=\"<js>\"`. Namespaced htmx events use double colons: `hx-on::after-request`, `hx-on::before-swap`, `hx-on::config-request`.\n\nUnlike `onclick`, it survives CSP `unsafe-inline` restrictions being the htmx way, and works for htmx's own events.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-on/" }]
+    },
+    {
+      "name": "hx-ext",
+      "description": "Enables htmx extensions on this element and its children, comma-separated. `ignore:<name>` disables one for a subtree.\n\nCommon: `sse`, `ws`, `response-targets`, `head-support`, `preload`.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-ext/" }]
+    },
+    {
+      "name": "hx-encoding",
+      "description": "Changes the request encoding. `multipart/form-data` is the value that matters — required for file uploads.",
+      "valueSet": "hx-encoding",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-encoding/" }]
+    },
+    {
+      "name": "hx-preserve",
+      "description": "Keeps this element as-is across swaps, by `id`. For video players, iframes and anything with state the server cannot reproduce.",
+      "valueSet": "v",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-preserve/" }]
+    },
+    {
+      "name": "hx-disable",
+      "description": "Disables all htmx processing for this element and its children. The correct guard around user-generated HTML.",
+      "valueSet": "v",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-disable/" }]
+    },
+    {
+      "name": "hx-disinherit",
+      "description": "Stops named attributes being inherited by children: `*` for all, or a space-separated list such as `hx-target hx-swap`.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-disinherit/" }]
+    },
+    {
+      "name": "hx-inherit",
+      "description": "Opts specific attributes back into inheritance when htmx is configured with `disableInheritance: true`.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-inherit/" }]
+    },
+    {
+      "name": "hx-history",
+      "description": "Set to `false` to keep this page out of the history cache in localStorage — for pages showing sensitive data.",
+      "valueSet": "v",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-history/" }]
+    },
+    {
+      "name": "hx-history-elt",
+      "description": "Marks the element to snapshot and restore for history, instead of `<body>`. Rarely needed.",
+      "valueSet": "v",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-history-elt/" }]
+    },
+    {
+      "name": "hx-validate",
+      "description": "Forces HTML5 validation before the request, for elements that are not inside a form.",
+      "valueSet": "v",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-validate/" }]
+    },
+    {
+      "name": "hx-request",
+      "description": "Per-request config as a JSON object: `timeout` (ms), `credentials`, `noHeaders`. Prefix with `js:` to evaluate.",
+      "references": [{ "name": "htmx docs", "url": "https://htmx.org/attributes/hx-request/" }]
+    }
+  ],
+  "valueSets": [
+    {
+      "name": "hx-swap",
+      "values": [
+        { "name": "innerHTML", "description": "Replace the target's content. The default." },
+        { "name": "outerHTML", "description": "Replace the target element itself." },
+        { "name": "textContent", "description": "Replace the target's text content, without parsing the response as HTML." },
+        { "name": "beforebegin", "description": "Insert before the target, as a sibling." },
+        { "name": "afterbegin", "description": "Insert as the target's first child." },
+        { "name": "beforeend", "description": "Insert as the target's last child. The append case." },
+        { "name": "afterend", "description": "Insert after the target, as a sibling." },
+        { "name": "delete", "description": "Delete the target regardless of the response." },
+        { "name": "none", "description": "Do not swap. Out-of-band swaps in the response still apply." }
+      ]
+    },
+    {
+      "name": "hx-target",
+      "values": [
+        { "name": "this", "description": "The element itself. The default behaviour, stated explicitly." },
+        { "name": "closest ", "description": "Nearest ancestor (or self) matching the selector: `closest tr`." },
+        { "name": "find ", "description": "First descendant matching the selector: `find .body`." },
+        { "name": "next", "description": "Next sibling element; `next <selector>` for the next match in the document." },
+        { "name": "previous", "description": "Previous sibling element; `previous <selector>` for the previous match." },
+        { "name": "body", "description": "The document body." }
+      ]
+    },
+    {
+      "name": "hx-trigger",
+      "values": [
+        { "name": "click" },
+        { "name": "change" },
+        { "name": "submit" },
+        { "name": "input" },
+        { "name": "keyup" },
+        { "name": "blur" },
+        { "name": "focus" },
+        { "name": "mouseenter" },
+        { "name": "load", "description": "Fires once when the element is loaded into the DOM — lazy loading." },
+        { "name": "revealed", "description": "Fires when the element scrolls into the viewport — infinite scroll." },
+        { "name": "intersect", "description": "Fires on IntersectionObserver intersection; takes `root:` and `threshold:` modifiers." },
+        { "name": "every 2s", "description": "Polling. Any duration: `every 500ms`, `every 1m`." }
+      ]
+    },
+    {
+      "name": "hx-params",
+      "values": [
+        { "name": "*", "description": "All parameters. The default." },
+        { "name": "none", "description": "No parameters." },
+        { "name": "not ", "description": "All except the comma-separated list that follows." }
+      ]
+    },
+    {
+      "name": "hx-encoding",
+      "values": [
+        { "name": "multipart/form-data", "description": "Required for file uploads." },
+        { "name": "application/x-www-form-urlencoded", "description": "The default." }
+      ]
+    },
+    {
+      "name": "hx-url-bool",
+      "values": [
+        { "name": "true" },
+        { "name": "false" }
+      ]
+    }
+  ]
+}

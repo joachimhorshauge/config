@@ -1,0 +1,160 @@
+{
+  "template if": {
+    "prefix": "if",
+    "body": ["{{ if ${1:.Cond} }}", "\t$0", "{{ end }}"],
+    "description": "Go template: if / end"
+  },
+  "template if else": {
+    "prefix": "ifelse",
+    "body": ["{{ if ${1:.Cond} }}", "\t$2", "{{ else }}", "\t$0", "{{ end }}"],
+    "description": "Go template: if / else / end"
+  },
+  "template range": {
+    "prefix": "range",
+    "body": ["{{ range ${1:.Items} }}", "\t$0", "{{ end }}"],
+    "description": "Go template: range / end"
+  },
+  "template range index": {
+    "prefix": "rangei",
+    "body": ["{{ range \\$${1:i}, \\$${2:v} := ${3:.Items} }}", "\t$0", "{{ end }}"],
+    "description": "Go template: range with index and value"
+  },
+  "template range else": {
+    "prefix": "rangeelse",
+    "body": [
+      "{{ range ${1:.Items} }}",
+      "\t$2",
+      "{{ else }}",
+      "\t${0:<p>Nothing here yet.</p>}",
+      "{{ end }}"
+    ],
+    "description": "Go template: range with empty-case else"
+  },
+  "template with": {
+    "prefix": "with",
+    "body": ["{{ with ${1:.Value} }}", "\t$0", "{{ end }}"],
+    "description": "Go template: with / end"
+  },
+  "template define": {
+    "prefix": "define",
+    "body": ["{{ define \"${1:name}\" }}", "\t$0", "{{ end }}"],
+    "description": "Go template: define a named template"
+  },
+  "template block": {
+    "prefix": "block",
+    "body": ["{{ block \"${1:name}\" ${2:.} }}", "\t$0", "{{ end }}"],
+    "description": "Go template: block with default body"
+  },
+  "template invoke": {
+    "prefix": "tmpl",
+    "body": ["{{ template \"${1:name}\" ${2:.} }}$0"],
+    "description": "Go template: invoke a named template"
+  },
+  "template variable": {
+    "prefix": "tvar",
+    "body": ["{{ \\$${1:name} := ${2:.Value} }}$0"],
+    "description": "Go template: assign a variable"
+  },
+  "template action": {
+    "prefix": "{{",
+    "body": ["{{ ${1:.Field} }}$0"],
+    "description": "Go template: an action"
+  },
+  "template comment": {
+    "prefix": "tcomment",
+    "body": ["{{/* $0 */}}"],
+    "description": "Go template: comment (not emitted in output)"
+  },
+  "template pipeline": {
+    "prefix": "pipe",
+    "body": ["{{ ${1:.Value} | ${2:printf \"%s\"} }}$0"],
+    "description": "Go template: pipeline through a function"
+  },
+
+  "htmx form": {
+    "prefix": "hxform",
+    "body": [
+      "<form hx-post=\"${1:/items}\" hx-target=\"${2:#list}\" hx-swap=\"${3:beforeend}\" hx-disabled-elt=\"find button\">",
+      "\t$0",
+      "\t<button type=\"submit\">${4:Save}</button>",
+      "</form>"
+    ],
+    "description": "htmx: form posting into a target, guarded against double submit"
+  },
+  "htmx delete button": {
+    "prefix": "hxdel",
+    "body": [
+      "<button hx-delete=\"${1:/items/{{ .ID }}}\"",
+      "\t\thx-target=\"closest ${2:tr}\"",
+      "\t\thx-swap=\"outerHTML swap:200ms\"",
+      "\t\thx-confirm=\"${3:Delete this item?}\">${4:Delete}</button>"
+    ],
+    "description": "htmx: delete that removes its own row"
+  },
+  "htmx active search": {
+    "prefix": "hxsearch",
+    "body": [
+      "<input type=\"search\" name=\"${1:q}\"",
+      "\t\thx-get=\"${2:/search}\"",
+      "\t\thx-trigger=\"keyup changed delay:${3:300}ms, search\"",
+      "\t\thx-target=\"${4:#results}\"",
+      "\t\thx-indicator=\"${5:#spinner}\">"
+    ],
+    "description": "htmx: debounced active search"
+  },
+  "htmx lazy load": {
+    "prefix": "hxlazy",
+    "body": [
+      "<div hx-get=\"${1:/fragment}\" hx-trigger=\"${2:load}\" hx-swap=\"outerHTML\">",
+      "\t${0:<span class=\"htmx-indicator\">Loading…</span>}",
+      "</div>"
+    ],
+    "description": "htmx: load a fragment on load or reveal"
+  },
+  "htmx infinite scroll": {
+    "prefix": "hxinfinite",
+    "body": [
+      "<div hx-get=\"${1:/items?page={{ .NextPage }}}\"",
+      "\t\thx-trigger=\"revealed\"",
+      "\t\thx-swap=\"outerHTML\">",
+      "\t${0:<span class=\"htmx-indicator\">Loading…</span>}",
+      "</div>"
+    ],
+    "description": "htmx: infinite scroll sentinel"
+  },
+  "htmx poll": {
+    "prefix": "hxpoll",
+    "body": ["<div hx-get=\"${1:/status}\" hx-trigger=\"every ${2:2}s\" hx-swap=\"innerHTML\">$0</div>"],
+    "description": "htmx: poll an endpoint on an interval"
+  },
+  "htmx inline edit": {
+    "prefix": "hxedit",
+    "body": [
+      "<div hx-target=\"this\" hx-swap=\"outerHTML\">",
+      "\t$0",
+      "\t<button hx-get=\"${1:/items/{{ .ID }}/edit}\">Edit</button>",
+      "</div>"
+    ],
+    "description": "htmx: click-to-edit block that replaces itself"
+  },
+  "htmx indicator": {
+    "prefix": "hxind",
+    "body": ["<span id=\"${1:spinner}\" class=\"htmx-indicator\">${0:Loading…}</span>"],
+    "description": "htmx: request indicator element"
+  },
+  "htmx out of band": {
+    "prefix": "hxoob",
+    "body": ["<${1:span} id=\"${2:cart-count}\" hx-swap-oob=\"true\">$0</${1:span}>"],
+    "description": "htmx: out-of-band swap fragment for a response"
+  },
+  "htmx boost body": {
+    "prefix": "hxboost",
+    "body": ["<body hx-boost=\"true\">", "\t$0", "</body>"],
+    "description": "htmx: boost all links and forms in the document"
+  },
+  "htmx script tag": {
+    "prefix": "hxsrc",
+    "body": ["<script src=\"https://unpkg.com/htmx.org@${1:2.0.4}\" crossorigin=\"anonymous\"></script>$0"],
+    "description": "htmx: CDN script tag"
+  }
+}

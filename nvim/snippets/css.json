@@ -1,0 +1,69 @@
+{
+  "htmx indicator styles": {
+    "prefix": "hxindicator",
+    "body": [
+      "/* htmx toggles .htmx-request on the indicator (or the requesting element",
+      "   when hx-indicator is unset) for the life of the request. */",
+      ".htmx-indicator {",
+      "\topacity: 0;",
+      "\ttransition: opacity ${1:200}ms ease-in;",
+      "}",
+      ".htmx-request .htmx-indicator,",
+      ".htmx-request.htmx-indicator {",
+      "\topacity: 1;",
+      "}$0"
+    ],
+    "description": "htmx: fade-in request indicator"
+  },
+  "htmx swapping transition": {
+    "prefix": "hxswap",
+    "body": [
+      "/* Needs hx-swap=\"... swap:${1:200}ms\" so htmx waits before replacing. */",
+      "${2:.item}.htmx-swapping {",
+      "\topacity: 0;",
+      "\ttransition: opacity ${1:200}ms ease-out;",
+      "}$0"
+    ],
+    "description": "htmx: fade out on swap"
+  },
+  "htmx settling transition": {
+    "prefix": "hxsettle",
+    "body": ["${1:.item}.htmx-added {", "\topacity: 0;", "}", "${1:.item} {", "\topacity: 1;", "\ttransition: opacity ${2:200}ms ease-out;", "}$0"],
+    "description": "htmx: fade in newly added content"
+  },
+  "container query": {
+    "prefix": "container",
+    "body": ["@container ${1:(min-width: 400px)} {", "\t$0", "}"],
+    "description": "CSS container query"
+  },
+  "cascade layer": {
+    "prefix": "layer",
+    "body": ["@layer ${1:components} {", "\t$0", "}"],
+    "description": "CSS cascade layer"
+  },
+  "media query": {
+    "prefix": "mq",
+    "body": ["@media (min-width: ${1:48rem}) {", "\t$0", "}"],
+    "description": "CSS media query"
+  },
+  "prefers reduced motion": {
+    "prefix": "reducedmotion",
+    "body": ["@media (prefers-reduced-motion: reduce) {", "\t*, *::before, *::after {", "\t\tanimation-duration: 0.01ms !important;", "\t\ttransition-duration: 0.01ms !important;", "\t}", "}$0"],
+    "description": "CSS: honour reduced-motion"
+  },
+  "grid auto fit": {
+    "prefix": "gridfit",
+    "body": ["display: grid;", "grid-template-columns: repeat(auto-fit, minmax(${1:16rem}, 1fr));", "gap: ${2:1rem};$0"],
+    "description": "CSS responsive grid without media queries"
+  },
+  "flex center": {
+    "prefix": "flexcenter",
+    "body": ["display: flex;", "align-items: center;", "justify-content: ${1:center};", "gap: ${2:0.5rem};$0"],
+    "description": "CSS flex centering"
+  },
+  "custom property block": {
+    "prefix": "vars",
+    "body": [":root {", "\t--${1:color-fg}: ${2:#1a1a1a};", "\t$0", "}"],
+    "description": "CSS custom properties on :root"
+  }
+}

@@ -2,6 +2,34 @@ require("conform").setup({
 	formatters_by_ft = {
 		go = { "goimports", "gofumpt" }, -- runs sequentially: imports first, then gofumpt
 		lua = { "stylua" },
+		qml = { "qmlformat" },
+
+		-- djlint rather than prettier, and this is the whole reason: prettier
+		-- parses HTML as HTML, so `{{ if }}<tr>{{ end }}` is an unclosed tag to
+		-- it and it reflows the block into something that no longer compiles.
+		-- djlint has a Go template profile and treats the actions as structure.
+		html = { "djlint" },
+
+		-- prettier is fine for real CSS — no template syntax reaches these
+		-- files, and it is better at CSS than djlint is.
+		css = { "prettier" },
+		scss = { "prettier" },
+
+		-- typst is absent on purpose: tinymist formats it with the typstyle it
+		-- has built in, and `lsp_format = "fallback"` below reaches for the
+		-- server precisely when no formatter is listed here.
+	},
+
+	formatters = {
+		djlint = {
+			-- Reading from stdin means djlint never sees a filename, so it
+			-- cannot guess the flavour — without --profile it falls back to the
+			-- plain-HTML rules and mangles {{ }} exactly like prettier would.
+			--
+			-- --indent matches 'shiftwidth'; djlint emits spaces either way,
+			-- there being no tab mode.
+			prepend_args = { "--profile=golang", "--indent=4" },
+		},
 	},
 
 	-- Format on save. Returns nil to skip, or a table of format opts.
