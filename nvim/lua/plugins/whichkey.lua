@@ -10,4 +10,5 @@ wk.add({
 	{ "<leader>f", group = "find" },
 	{ "<leader>c", group = "code", mode = { "n", "v" } },
 	{ "<leader>d", group = "draw" },
+	{ "<leader>x", group = "exercise" },
 })

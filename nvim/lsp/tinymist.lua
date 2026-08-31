@@ -5,10 +5,31 @@ return {
   cmd = { 'tinymist', 'lsp' },
   filetypes = { 'typst' },
 
-  -- typst.toml only exists for packages. A loose .typ file is the common case,
-  -- so '.git' carries the root most of the time, and the server falls back to
-  -- the file's own directory when neither is found.
-  root_markers = { 'typst.toml', '.git' },
+  -- The root decides what a leading '/' in an #import means, so it has to be
+  -- the same root the file is really compiled with — otherwise the server
+  -- reports an error on an import that builds perfectly well.
+  --
+  -- Inside the zk notebook that root is the notebook. notes-site compiles every
+  -- .typ in it with `typst compile --root <notebook>`, so
+  -- `#import "/templates/exercise.typ"` resolves there; rooting an exercise at
+  -- its own directory instead looks for exercises/IPSRP/templates/ and finds
+  -- nothing. The notebook has no typst.toml and is not a git repo, so no marker
+  -- would ever have found it.
+  --
+  -- Everywhere else the markers apply as before: typst.toml only exists for
+  -- packages, a loose .typ is the common case, and '.git' carries the root most
+  -- of the time. on_dir is called either way — with nil when nothing is found,
+  -- which leaves the server treating the file's own directory as the root.
+  root_dir = function(bufnr, on_dir)
+    local notebook = vim.fs.normalize(vim.env.ZK_NOTEBOOK_DIR or vim.fn.expand('~/notes'))
+    local file = vim.fs.normalize(vim.api.nvim_buf_get_name(bufnr))
+
+    if vim.fs.relpath(notebook, file) then
+      on_dir(notebook)
+      return
+    end
+    on_dir(vim.fs.root(bufnr, { 'typst.toml', '.git' }))
+  end,
 
   settings = {
     -- typstyle is compiled into tinymist, so formatting needs nothing else
