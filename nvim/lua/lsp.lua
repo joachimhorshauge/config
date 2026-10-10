@@ -47,6 +47,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		map('n', '<leader>cf', function()
 			vim.lsp.buf.format({ async = true })
 		end, 'Format buffer')
+		-- The same as the built-in `gra`, but next to format and diagnostics where
+		-- which-key shows it. Visual mode offers actions for just the selection.
+		map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, 'Code action')
 	end,
 })
 
